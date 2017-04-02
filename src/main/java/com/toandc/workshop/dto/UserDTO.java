@@ -95,4 +95,11 @@ public class UserDTO {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "UserDTO[userId=%d, fullName='%s', address='%s', phone='%s', note='%s', modifyDate='%s', createDate='%s']",
+                userId, fullName, address, phone, note, modifyDate.toString(), createDate.toString());
+    }
 }

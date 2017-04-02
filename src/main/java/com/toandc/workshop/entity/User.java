@@ -122,8 +122,8 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, fullName='%s', lastName='%s']",
-                userId, fullName, address);
+                "User[userId=%d, fullName='%s', address='%s', phone='%s', note='%s', modifyDate='%s', createDate='%s']",
+                userId, fullName, address, phone, note, modifyDate == null ? "-" : modifyDate.toString(), createDate == null ? "-" : createDate.toString());
     }
 
 }

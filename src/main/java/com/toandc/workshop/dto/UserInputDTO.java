@@ -54,4 +54,11 @@ public class UserInputDTO {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "UserInputDTO[fullName='%s', address='%s', phone='%s', note='%s']",
+                fullName, address, phone, note);
+    }
 }

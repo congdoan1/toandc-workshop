@@ -25,9 +25,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
-    @PersistenceContext
-    private EntityManager em;
-
     @Override
     public List<UserDTO> findByFullName(String fullName) {
         List<User> users = repository.findByFullName("%" + fullName + "%");
@@ -60,8 +57,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO create(UserInputDTO userInputDTO) {
         User user = repository.saveAndFlush(convertToEntity(userInputDTO));
-        em.flush();
-        System.out.println(repository.findOne(user.getUserId()).getCreateDate());
         return new UserDTO(user);
     }
 
