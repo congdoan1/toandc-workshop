@@ -1,47 +1,62 @@
 package com.toandc.workshop.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by toandc on 3/31/17.
  */
 @Entity
-@NamedQuery(name = "user.findByFullName", query = "SELECT u FROM User u WHERE LOWER(u.fullName) = LOWER(?1)")
-@Table(name = "User")
+@NamedQuery(name = "User.findByFullName", query = "SELECT u FROM User u WHERE LOWER(u.fullName) LIKE LOWER(?1)")
+@Table(name = "user")
 public class User {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
-    @Column(name = "FullName", nullable = true)
+    @Column(name = "full_name")
+    @NotNull
     private String fullName;
 
-    @Column(name = "Address", nullable = true)
+    @Column(name = "address")
+    @NotNull
     private String address;
 
-    @Column(name = "Phone", nullable = true)
+    @Column(name = "phone")
+    @NotNull
     private String phone;
 
-    @Column(name = "Note", nullable = true)
+    @Column(name = "note")
+    @NotNull
     private String note;
 
-    @Column(name = "ModifyDate", nullable = false)
+    @Column(name = "modify_date", nullable = false)
     private Date modifyDate;
 
-    @Column(name = "CreateDateUser", nullable = false)
-    private Date createDateUser;
+    @Column(name = "create_date", nullable = false)
+    private Date createDate;
 
     public User() {
     }
 
-    public User(String fullName, String address, String phone, String note) {
+    public User(String fullName, String address, String phone, String note, Date modifyDate, Date createDate) {
         this.fullName = fullName;
         this.address = address;
         this.phone = phone;
         this.note = note;
+        this.modifyDate = modifyDate;
+        this.createDate = createDate;
     }
 
     public int getUserId() {
@@ -92,12 +107,24 @@ public class User {
         this.modifyDate = modifyDate;
     }
 
-    public Date getCreateDateUser() {
-        return createDateUser;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateDateUser(Date createDateUser) {
-        this.createDateUser = createDateUser;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modifyDate = new Date();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        Date now = new Date();
+        createDate = now;
+        modifyDate = now;
     }
 
     @Override

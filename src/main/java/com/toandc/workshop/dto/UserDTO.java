@@ -1,5 +1,9 @@
 package com.toandc.workshop.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.toandc.workshop.entity.User;
+import com.toandc.workshop.util.Constants;
+
 import java.util.Date;
 
 /**
@@ -17,18 +21,22 @@ public class UserDTO {
 
     private String note;
 
+    @JsonFormat(pattern = Constants.DATETIME_FORMAT_JSON, timezone = Constants.TIMEZONE_FORMAT_JSON)
     private Date modifyDate;
 
-    private Date createDateUser;
+    @JsonFormat(pattern = Constants.DATETIME_FORMAT_JSON, timezone = Constants.TIMEZONE_FORMAT_JSON)
+    private Date createDate;
 
-    public UserDTO(int userId, String fullName, String address, String phone, String note, Date modifyDate, Date createDateUser) {
-        this.userId = userId;
-        this.fullName = fullName;
-        this.address = address;
-        this.phone = phone;
-        this.note = note;
-        this.modifyDate = modifyDate;
-        this.createDateUser = createDateUser;
+    public UserDTO() {}
+
+    public UserDTO(User user) {
+        this.userId = user.getUserId();
+        this.fullName = user.getFullName();
+        this.address = user.getAddress();
+        this.phone = user.getPhone();
+        this.note = user.getNote();
+        this.modifyDate = user.getModifyDate();
+        this.createDate = user.getCreateDate();
     }
 
     public int getUserId() {
@@ -79,11 +87,11 @@ public class UserDTO {
         this.modifyDate = modifyDate;
     }
 
-    public Date getCreateDateUser() {
-        return createDateUser;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateDateUser(Date createDateUser) {
-        this.createDateUser = createDateUser;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
