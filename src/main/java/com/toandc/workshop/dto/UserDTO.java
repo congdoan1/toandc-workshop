@@ -27,7 +27,8 @@ public class UserDTO {
     @JsonFormat(pattern = Constants.DATETIME_FORMAT_JSON, timezone = Constants.TIMEZONE_FORMAT_JSON)
     private Date createDate;
 
-    public UserDTO() {}
+    public UserDTO() {
+    }
 
     public UserDTO(User user) {
         this.userId = user.getUserId();

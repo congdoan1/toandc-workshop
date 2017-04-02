@@ -1,14 +1,6 @@
 package com.toandc.workshop.entity;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 

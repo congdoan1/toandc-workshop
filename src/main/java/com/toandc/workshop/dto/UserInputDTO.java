@@ -13,7 +13,8 @@ public class UserInputDTO {
 
     private String note;
 
-    public UserInputDTO() {}
+    public UserInputDTO() {
+    }
 
     public UserInputDTO(String fullName, String address, String phone, String note) {
         this.fullName = fullName;
